@@ -1,0 +1,25 @@
+tables created locally using pgadmin
+
+CREATE table books(
+	book_id serial primary key,
+	title varchar(100) not null,
+	author varchar(100) not null,
+	availablity bool not null,
+	replacement_cost integer not null,
+);
+
+CREATE table students(
+	student_id varchar(100) primary key unique,
+	first_name varchar(20) unique not null,
+	last_name varchar(30) unique not null,
+	batch varchar(5) not null,
+	email varchar(3) unique,
+);
+
+CREATE table history(
+	transaction_id serial primary key,
+	borrowed_book integer references books(book_id),
+	borrower integer references students(student_id),
+	borrow_date timestamp not null,
+	return_date timestamp,
+);
